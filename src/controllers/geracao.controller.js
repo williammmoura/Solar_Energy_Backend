@@ -19,7 +19,7 @@ class GeracaoController {
     }
   }
 
-  async getGeracao(req, res) {
+  async obterGeracao(req, res) {
     const { id } = req.params;
 
     try {
