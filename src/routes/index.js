@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { routesFromGeracao } = require("./geracao.routes");
 
-const routes = Router();
+const routes = new Router();
 
 routes.use("/", [routesFromGeracao()]);
 

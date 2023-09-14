@@ -5,6 +5,12 @@ class GeracaoController {
     try {
       const { data_geracao, total_kw } = req.body;
 
+      if (!data_geracao || !total_kw) {
+        return res.status(400).send({
+          message: "Dados insuficientes!",
+        });
+      }
+      console.log(data_geracao, total_kw);
       const newGeracao = await Geracao.create({
         data_geracao,
         total_kw,
