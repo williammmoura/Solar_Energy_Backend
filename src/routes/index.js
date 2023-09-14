@@ -3,6 +3,6 @@ const { routesFromGeracao } = require("./geracao.routes");
 
 const routes = new Router();
 
-routes.use("/", [routesFromGeracao()]);
+routes.use("/api", [routesFromGeracao()]);
 
 module.exports = routes;
