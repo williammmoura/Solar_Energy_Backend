@@ -1,12 +1,14 @@
 const { Sequelize, BOOLEAN } = require('sequelize');
-const { connection } = require('../database/connection.settings');
+const { usuario } = require('./usuario')
+const { connection } = require('../database/connection');
+const unidadeConsumidora = require('../controllers/unidadeConsumidora');
 
 const UnidadeConsumidora = connection.define('UnidadeConsumidora', {
     unidadeconsumidora_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
-            model: User,
+            model: usuario,
             key: 'id'
         }
     },
@@ -22,7 +24,7 @@ const UnidadeConsumidora = connection.define('UnidadeConsumidora', {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    modelo:{
+    modelo: {
         type: Sequelize.STRING,
         allowNull: false,
     },
@@ -31,6 +33,13 @@ const UnidadeConsumidora = connection.define('UnidadeConsumidora', {
         allowNull: false
     }
 }, { underscored: true });
+
+unidadeConsumidora.associate = (models) => {
+    unidadeConsumidora.belongsTo(models.usuario, {
+        foreignKey: 'user_id',
+        allowNull: false
+    });
+};
 
 module.exports = {
     UnidadeConsumidora,

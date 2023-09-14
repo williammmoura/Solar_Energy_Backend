@@ -18,6 +18,14 @@ module.exports = {
           key: "id"
         }
       },
+      geracao_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: {tableName: "geracao"},
+          key: "id"
+        }
+      },
       apelido: {
         type: Sequelize.STRING,
         allowNull: false,

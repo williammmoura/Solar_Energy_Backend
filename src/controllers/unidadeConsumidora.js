@@ -20,3 +20,5 @@ class unidadeConsumidoraController{
         }
     }
 }
+
+module.exports = new unidadeConsumidoraController()
