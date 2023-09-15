@@ -4,11 +4,11 @@ const { connection } = require("../database/connection");
 const Geracao = connection.define(
   "geracao",
   {
-    dataGeracao: {
+    data_geracao: {
       type: DATE,
     },
 
-    totalKw: {
+    total_kw: {
       type: STRING,
     },
   },
