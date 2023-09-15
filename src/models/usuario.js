@@ -2,7 +2,7 @@ const { STRING } = require("sequelize")
 const { connection } = require("../database/connection")
 
 const Usuario = connection.define("usuario", {
-    name: {
+    nome: {
         type: STRING,
         allowNull: false
     },
@@ -24,6 +24,7 @@ const Usuario = connection.define("usuario", {
         type: STRING,
         allowNull: false
     }
-}, { underscored: true })
+
+}, { underscored: true, tableName: "usuario", timestamps: false })
 
 module.exports = { Usuario }
