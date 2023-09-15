@@ -11,7 +11,7 @@ module.exports = {
         primaryKey: true
       },
 
-      name: {
+      nome: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -27,14 +27,15 @@ module.exports = {
         allowNull: false
       },
 
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false
+      createdAt: {
+        allowNull: false,
+        defaultValue: new Date(),
+        type: Sequelize.DATE
       },
-
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false
+      updatedAt: {
+        allowNull: false,
+        defaultValue: new Date(),
+        type: Sequelize.DATE
       }
     })    
   },

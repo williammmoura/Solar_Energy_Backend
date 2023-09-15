@@ -1,10 +1,10 @@
-const { Router } = require('express')
-const { unidadeConsumidoraRoutesF } = require('../routes/unidadeConsumidora')
+const { Router } = require("express");
+const { routesFromGeracao } = require("./geracao.routes");
+const { routesFromUsuario } = require("./usuario.routes");
+const routes = new Router();
 
-const routes = new Router()
+routes.use("/api/v1", [routesFromGeracao()]);
+routes.use("/api/v1", [routesFromUsuario()]);
+routes.use('/app/v1', [unidadeConsumidoraRoutesF()])
 
-routes.use('/app', [
-    unidadeConsumidoraRoutesF()
-])
-
-module.exports = routes
+module.exports = routes;

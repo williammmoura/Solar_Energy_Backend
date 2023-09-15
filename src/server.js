@@ -1,42 +1,40 @@
-const express = require('express')
-const cors = require('cors')
-const routes = require('./routes/index')
-const { connection } = require('./database/connection')
+const express = require("express");
+const cors = require("cors");
+const { connection } = require("./database/connection");
+const routes = require("./routes");
 
 class Server {
-    constructor(server = express()) {
-        this.database()
-        this.middleware(server)
-        this.routesUse(server)
-        this.initServer(server)
-    }
+  constructor(
+    server = express() // Argumento do constructor auto iniciado da aplicação para usarmos as devidas funções do express
+  ) {
+    this.middlewares(server); // Instância do argumento da função para a função middlewares
+    this.database(); // Instância da função database
+    this.allRoutes(server);
+    this.initializeServer(server); // Instância da função initializeServer
+  }
 
-    async initServer(app) {
-        const PORT = 5000
+  async middlewares(app) {
+    app.use(cors()); // Utilização da função cors dentro do servidor
+    app.use(express.json()); // Habilitar entrada de dados como json no servidor
+  }
 
-        app.listen(PORT, () => console.log(`Server está rodando na porta ${PORT}`))
+  async database() {
+    try {
+      await connection.authenticate(); // Tentativa de conexão com o banco de dados
+      console.log("Conexão bem sucedida!");
+    } catch (error) {
+      console.error("Não foi possível conectar no banco de dados.", error);
+      throw error;
     }
+  }
+  async initializeServer(app) {
+    const PORT = 3333; // Valor da porta do servidor
+    app.listen(PORT, () => console.log(`Servidor executando na porta ${PORT}`)); // Execução do servidor
+  }
 
-    async middleware(app) {
-        app.use(cors())
-        app.use(express.json())
-    }
-
-    async database() {
-        try {
-            await connection.authenticate();
-            console.log('Conexão bem sucedida!');
-        } catch (error) {
-            console.error('Não foi possível conectar no banco de dados.', error);
-            throw error
-        }
-    }
-
-    async routesUse(app) {
-        app.use(routes)
-    }
+  async allRoutes(app) {
+    app.use(routes);
+  }
 }
 
-new Server()
-
-module.exports = { Server }
+module.exports = { Server }; // Exportação da Classe Server
