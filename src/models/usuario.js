@@ -1,4 +1,4 @@
-const { STRING, DATE } = require("sequelize")
+const { STRING } = require("sequelize")
 const { connection } = require("../database/connection")
 
 const Usuario = connection.define("usuario", {
@@ -23,11 +23,8 @@ const Usuario = connection.define("usuario", {
     senha: {
         type: STRING,
         allowNull: false
-    },
+    }
 
-    created_at: DATE,
-    update_at: DATE,
-
-}, { underscored: true })
+}, { underscored: true, tableName: "usuario", timestamps: false })
 
 module.exports = { Usuario }
